@@ -11,16 +11,19 @@
 #include "hardware/gpio.h"
 #include "hardware/dma.h"
 
-#include "st7735_lcd_lib.h"
-#include "picdata.h"
-#include "picdata_blue_parrot.h"
-#include "picdata_gif_boygirl_dance.h"
-#include "picdata_pic_ghulmil_com.h"
+#include "st7735/st7735_lcd_lib.h"
+#include "pic/picdata.h"
+#include "pic/picdata_blue_parrot.h"
+#include "pic/picdata_gif_boygirl_dance.h"
+#include "pic/picdata_pic_ghulmil_com.h"
 extern const uint16_t test_img_128x128[];
 extern const uint16_t test_img_128x160[];
 
 int main() {
     stdio_init_all();
+    gpio_pull_up(19);
+    gpio_pull_up(20);
+    gpio_pull_up(21);
     st7735_lcd_init(pio0);
     printf("init.\n");
     st7735_fill_screen_dma(ST7735_BLACK);
@@ -64,22 +67,25 @@ int main() {
             sleep_ms(10);
             st7735_draw_image_dma(0,124,128,36,128*50+(const uint16_t *)test_img_128x128_list[picture_index++%(sizeof(test_img_128x128_list)/sizeof(uint32_t))]);
             sleep_ms(20);
-        } else if (to_ms_since_boot(time_pico)<8000) {
-            st7735_draw_image_dma(0,0,128,128,(const uint16_t *)test_img_128x128_list[picture_index++%(sizeof(test_img_128x128_list)/sizeof(uint32_t))]);
-            sleep_ms(30); 
-        } else if (to_ms_since_boot(time_pico)<12000) {
-            st7735_draw_image_dma(0,0,128,128,(const uint16_t *)blue_parrot_128x128_list[picture_index++%(sizeof(blue_parrot_128x128_list)/sizeof(uint32_t))]);
-            sleep_ms(30); 
-        } else if (to_ms_since_boot(time_pico)<16000) {
-            st7735_draw_image_dma(0,0,128,128,(const uint16_t *)test_img_128x128);
-            sleep_ms(30); 
-        } else if (to_ms_since_boot(time_pico)<20000) {
-            st7735_draw_image_dma(0,0,128,160,(const uint16_t *)test_img_128x160);
-            sleep_ms(30); 
-        } else if (to_ms_since_boot(time_pico)<20500) {
+        } else if (to_ms_since_boot(time_pico)<5500) {
             st7735_fill_screen_dma(ST7735_BLACK);
             sleep_ms(30); 
-        } else if (to_ms_since_boot(time_pico)<23000){
+        } else if (to_ms_since_boot(time_pico)<11500) {
+            st7735_draw_image_dma(0,0,128,128,(const uint16_t *)test_img_128x128_list[picture_index++%(sizeof(test_img_128x128_list)/sizeof(uint32_t))]);
+            sleep_ms(30); 
+        } else if (to_ms_since_boot(time_pico)<15000) {
+            st7735_draw_image_dma(0,0,128,128,(const uint16_t *)blue_parrot_128x128_list[picture_index++%(sizeof(blue_parrot_128x128_list)/sizeof(uint32_t))]);
+            sleep_ms(30); 
+        } else if (to_ms_since_boot(time_pico)<18000) {
+            st7735_draw_image_dma(0,0,128,128,(const uint16_t *)test_img_128x128);
+            sleep_ms(30); 
+        } else if (to_ms_since_boot(time_pico)<22000) {
+            st7735_draw_image_dma(0,0,128,160,(const uint16_t *)test_img_128x160);
+            sleep_ms(30); 
+        } else if (to_ms_since_boot(time_pico)<22500) {
+            st7735_fill_screen_dma(ST7735_BLACK);
+            sleep_ms(30); 
+        } else if (to_ms_since_boot(time_pico)<28000){
             st7735_draw_image_dma(0,0,128,96,(const uint16_t *)ghulmil_com_128x96);
             sleep_ms(50); 
         } else {

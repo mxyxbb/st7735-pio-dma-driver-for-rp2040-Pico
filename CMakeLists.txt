@@ -32,21 +32,21 @@ pico_sdk_init()
 
 add_executable(${PROJECT_NAME} 
     main.c
-    fonts.c
-    st7735_lcd_lib.c
+    st7735/fonts.c
+    st7735/st7735_lcd_lib.c
 )
 
 pico_generate_pio_header(${PROJECT_NAME} 
-    ${CMAKE_CURRENT_LIST_DIR}/st77xx_lcd.pio
+    ${CMAKE_CURRENT_LIST_DIR}/st7735/st77xx_lcd.pio
 )
 
 pico_enable_stdio_uart(${PROJECT_NAME} 0)
 pico_enable_stdio_usb(${PROJECT_NAME} 1)
 
-# Add the standard library to the build
-target_link_libraries(${PROJECT_NAME}
-    pico_stdlib
-)
+# # Add the standard library to the build
+# target_link_libraries(${PROJECT_NAME}
+    
+# )
 
 # Add the standard include files to the build
 target_include_directories(${PROJECT_NAME} PRIVATE
@@ -56,6 +56,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 
 # Add any user requested libraries
 target_link_libraries(${PROJECT_NAME} 
+    pico_stdlib
     hardware_pio 
     hardware_dma
 )
