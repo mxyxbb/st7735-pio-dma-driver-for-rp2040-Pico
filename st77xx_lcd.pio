@@ -27,7 +27,7 @@ static inline void st77xx_lcd_program_init(PIO pio, uint sm, uint offset, uint d
     pio_gpio_init(pio, clk_pin);
     pio_sm_set_consecutive_pindirs(pio, sm, data_pin, 1, true);
     pio_sm_set_consecutive_pindirs(pio, sm, clk_pin, 1, true);
-    pio_sm_config c = st7789_lcd_program_get_default_config(offset);
+    pio_sm_config c = st77xx_lcd_program_get_default_config(offset);
     sm_config_set_sideset_pins(&c, clk_pin);
     sm_config_set_out_pins(&c, data_pin, 1);
     sm_config_set_fifo_join(&c, PIO_FIFO_JOIN_TX);
@@ -45,7 +45,7 @@ static inline void st77xx_lcd_put(PIO pio, uint sm, uint8_t x) {
         ;
     *(volatile uint8_t*)&pio->txf[sm] = x;
 }
-static inline void st7789_lcd_put16(PIO pio, uint sm, uint16_t x) {
+static inline void st77xx_lcd_put16(PIO pio, uint sm, uint16_t x) {
     while (pio_sm_is_tx_fifo_full(pio, sm))
         ;
     *(volatile uint16_t*)&pio->txf[sm] = x;
