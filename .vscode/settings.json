@@ -1,0 +1,15 @@
+{
+    "files.associations": {
+        "interp.h": "c",
+        "dma.h": "c",
+        "picdata.h": "c",
+        "picdata_blue_parrot.h": "c",
+        "stdbool.h": "c",
+        "*.pio": "c",
+        "st7735_lcd_lib.h": "c",
+        "raspberry_256x256_rgb565.h": "c",
+        "picdata_pic_parrot_png721.h": "c",
+        "picdata_pic_ghulmil_com.h": "c",
+        "stdlib.h": "c"
+    }
+}
